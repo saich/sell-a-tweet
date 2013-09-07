@@ -17,5 +17,11 @@
         "verbs": ["get"],
         "path": "/logout",
         "call": "sellatweet.logout"
+    },
+
+    "create": {
+        "verbs": ["post"],
+        "path": "/create",
+        "call": "sellatweet.create"
     }
 }]

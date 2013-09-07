@@ -8,5 +8,17 @@
     </form>
 {{else}}
 <a href="/logout" title="Logout">logout</a>
+
+<form method="post" action="/create">
+    <input name="title" placeholder="Title"/>
+    <input name="description" placeholder="Description"/>
+    <select name="currency">
+        <option value="USD">USD</option>
+        <option value="INR">INR</option>
+    </select>
+    <input type="number" name="base_price" placeholder="Base Price"/>
+    <input type="submit" value="create" />
+    
+</form>
 {{/if}}
 </div>

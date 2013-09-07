@@ -45,6 +45,26 @@ YUI.add('SellATweet', function(Y, NAME) {
                 ac.session.destroy();
                 ac.http.redirect("/", 303);
             });
+        },
+
+        create: function (ac) {
+            var authtoken = ac.session.get("imtoken");
+            if (!authtoken) {
+                ac.http.redirect("/", 303); // Redirect to login page
+            }
+
+            var params = ac.params.getFromBody();
+            var im = new Y.InstaMojo({
+                authtoken: ac.session.get("imtoken")
+            });
+
+            im.createOffer(params, function (err, result) {
+                if (result && result.success) {
+                    ac.done(result.offer);
+                } else {
+                    ac.error({});
+                }
+            });
         }
     };
 
