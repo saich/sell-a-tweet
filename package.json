@@ -11,6 +11,8 @@
         "mojito": "0.5.7",
         "async": "*",
         "config": "*",
+        "oauth": "*",
+        "ntwitter": "*",
         "mojito-session-addon": "*"
     },
     "engines": {
