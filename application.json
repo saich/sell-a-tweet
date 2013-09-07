@@ -1,7 +1,11 @@
 [{
     "settings": ["master"],
     "appPort": "8666",
-    "specs": {},
+    "specs": {
+        "sellatweet": {
+            "type": "SellATweet"
+        }
+    },
     "yui": {
         "config": {
             "debug": true,

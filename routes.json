@@ -1,4 +1,8 @@
 [{
-    "settings": [ "master" ]
-
+    "settings": ["master"],
+    "index": {
+        "verbs": ["get"],
+        "path": "/",
+        "call": "sellatweet.index"
+    }
 }]
