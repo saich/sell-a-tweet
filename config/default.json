@@ -1,6 +1,11 @@
 {
     "port": 8666,
     "maxSockets": {
-        "http": 30
+        "http": 30,
+        "https": 30
+    },
+    "instamojo": {
+        "endpoint": "https://www.instamojo.com/api/1",
+        "appid": "9b2b46005b4e17e0a3a1d7ab01653a0e"
     }
 }

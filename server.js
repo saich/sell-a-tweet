@@ -6,13 +6,11 @@ var path = require('path');
 var Mojito = require('mojito');
 var config = require('config');
 
-/* Set the allowed number of parallel http requests to a host.
+/* Set the allowed number of parallel http / https requests to a host.
  * The default value, if not set is 5.
- * Since we use a single host for all APIs, this small limit might be 
- * a bottlneck for us. We need to increase this number, and also 
- * keep this value in acceptable limits to avoid DOSing the server.
  */
 require("http").globalAgent.maxSockets = config.maxSockets.http;
+require("https").globalAgent.maxSockets = config.maxSockets.https;
 
 
 // Mapping from NODE_ENV to the Mojito's contexts.
