@@ -1,8 +1,15 @@
 [{
     "settings": ["master"],
+
     "index": {
         "verbs": ["get"],
         "path": "/",
         "call": "sellatweet.index"
+    },
+
+    "logout": {
+        "verbs": ["get"],
+        "path": "/logout",
+        "call": "sellatweet.logout"
     }
 }]
