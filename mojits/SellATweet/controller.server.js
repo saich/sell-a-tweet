@@ -5,10 +5,14 @@ YUI.add('SellATweet', function(Y, NAME) {
     Y.namespace('mojito.controllers')[NAME] = {
 
         index: function(ac) {
+            var st = ac.session.get("status");
+            if (!st) {
+                ac.session.set("status", "saiprasad" + Date.now());
+            }
              ac.done({
-                status: 'Mojito is working.'
+                status: ac.session.get("status")
             });
         }
     };
 
-}, '0.0.1', {requires: ['mojito']});
+}, '0.0.1', {requires: ['mojito', 'mojito-session-addon']});

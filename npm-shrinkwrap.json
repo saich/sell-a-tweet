@@ -233,6 +233,9 @@
     },
     "config": {
       "version": "0.4.29"
+    },
+    "mojito-session-addon": {
+      "version": "0.0.8"
     }
   }
 }
