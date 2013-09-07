@@ -5,12 +5,33 @@ YUI.add('SellATweet', function(Y, NAME) {
     Y.namespace('mojito.controllers')[NAME] = {
 
         index: function(ac) {
-            var st = ac.session.get("status");
-            if (!st) {
-                ac.session.set("status", "saiprasad" + Date.now());
-            }
+            var loginerror = ac.session.get("loginerror");
+            ac.session.set("loginerror", false);
              ac.done({
+                loginerror: loginerror,
+                needAuth: !ac.session.get("imtoken"),
                 status: ac.session.get("status")
+            });
+        },
+
+        login: function (ac) {
+            var username = ac.params.getFromBody("username"),
+                password = ac.params.getFromBody("password");
+
+            var im = new Y.InstaMojo({
+                authtoken: ac.session.get("imtoken")
+            });
+
+            im.auth(username, password, function (err, result) {
+                if (result && result.success) {
+                    // login success..
+                    ac.session.set("imtoken", result.token);
+                    ac.http.redirect("/", 303);
+                } else {
+                    // login failure..
+                    ac.session.set("loginerror", true);
+                    ac.http.redirect("/", 303);
+                }
             });
         },
 
@@ -27,4 +48,6 @@ YUI.add('SellATweet', function(Y, NAME) {
         }
     };
 
-}, '0.0.1', {requires: ['mojito', 'mojito-session-addon', 'mojito-http-addon', 'instamojo']});
+}, '0.0.1', {requires: ['mojito',
+    'mojito-session-addon', 'mojito-http-addon', 'mojito-params-addon',
+    'instamojo']});

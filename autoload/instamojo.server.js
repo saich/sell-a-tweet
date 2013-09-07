@@ -60,6 +60,7 @@ YUI.add("instamojo", function (Y, NAME) {
             process.nextTick(function () {
                callback(new Error("Auth Token doesn't exist! Nothing to delete!"), null);
             });
+            return;
         }
 
         var self = this;

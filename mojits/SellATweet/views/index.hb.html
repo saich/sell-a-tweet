@@ -1,6 +1,12 @@
 <div id="{{mojit_view_id}}">
-    <dl>
-        <dt>status</dt>
-        <dd id="dd_status">{{status}}</dd>
-    </dl>
+{{#if needAuth}}
+{{#if loginerror}}<p class="error">Invalid credentials. Try again!</p>{{/if}}
+    <form method="post" action="/login">
+        <label>username: <input type="text" name="username" placeholder="username"></label>
+        <label>password: <input type="password" name="password" placeholder="password"></label>
+        <input type="submit" value="log in" />
+    </form>
+{{else}}
+<a href="/logout" title="Logout">logout</a>
+{{/if}}
 </div>
