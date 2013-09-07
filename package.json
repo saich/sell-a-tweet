@@ -1,0 +1,28 @@
+{
+    "name": "sell-a-tweet",
+    "description": "A small webapp that facilitates selling your awesome tweets",
+    "version": "0.0.1",
+    "author": {
+        "name": "Sai Prasad",
+        "email": "saiprasad.ch@gmail.com"
+    },
+    "private": true,
+    "dependencies": {
+        "mojito": "0.5.7",
+        "async": "*",
+        "config": "*"
+    },
+    "engines": {
+        "node": ">= 0.8.x"
+    },
+    "scripts": {
+        "lint": "jshint . --extra-ext .json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/saich/sell-a-tweet.git"
+    },
+    "bugs": {
+        "url": "https://github.com/saich/sell-a-tweet/issues"
+    }
+}
