@@ -17,6 +17,7 @@
         "node": ">= 0.8.x"
     },
     "scripts": {
+        "test": "node_modules/.bin/mojito test app .",
         "lint": "jshint . --extra-ext .json"
     },
     "repository": {

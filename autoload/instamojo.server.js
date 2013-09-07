@@ -9,6 +9,7 @@ YUI.add("instamojo", function (Y, NAME) {
     var LOG = new Y.Logger(NAME);
 
     function InstaMojo(options) {
+        options = options || {};
         this._endpoint = options.endpoint || config.instamojo.endpoint;
         this._appid = options.appId || config.instamojo.appid;
         this._authtoken = options.authtoken;
@@ -55,9 +56,16 @@ YUI.add("instamojo", function (Y, NAME) {
     };
 
     InstaMojo.prototype.deleteAuthToken = function (callback) {
+        if (!this._authtoken) {
+            process.nextTick(function () {
+               callback(new Error("Auth Token doesn't exist! Nothing to delete!"), null);
+            });
+        }
+
+        var self = this;
         this.request("DELETE", "/auth/" + this._authtoken + "/", {}, {}, function (err, result) {
             if (result && result.success) {
-                this._authtoken = null;
+                self._authtoken = null;
                 callback(err, result);
             }
         });
