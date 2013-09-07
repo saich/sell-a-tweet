@@ -14,6 +14,10 @@ YUI.add("instamojo", function (Y, NAME) {
         this._authtoken = options.authtoken;
     }
 
+    InstaMojo.prototype.getAuthToken = function () {
+        return this._authtoken;
+    };
+
     InstaMojo.prototype.request = function (method, url, params, config, callback) {
         LOG.debug(method + " request to: " + url);
         // Add the default headers required for InstaMojo APIs
@@ -26,7 +30,57 @@ YUI.add("instamojo", function (Y, NAME) {
 
         url = this._endpoint + url;
 
+        // TODO: Need a wrapper around callback to check if `success` is true or not..
         REST[method](url, params, config, callback);
+    };
+
+    InstaMojo.prototype.debug = function (callback) {
+        this.request("/debug/", {}, {}, callback);
+    };
+
+    InstaMojo.prototype.auth = function (username, password, callback) {
+        // Reset cached authtoken..
+        this._authtoken = null;
+
+        var self = this;
+        this.request("POST", "/auth/", {
+            username: username,
+            password: password
+        }, {}, function (err, result) {
+            if (result && result.success) {
+                self._authtoken = result.token;
+            }
+            callback(err, result);
+        });
+    };
+
+    InstaMojo.prototype.deleteAuthToken = function (callback) {
+        this.request("DELETE", "/auth/" + this._authtoken + "/", {}, {}, function (err, result) {
+            if (result && result.success) {
+                this._authtoken = null;
+                callback(err, result);
+            }
+        });
+    };
+
+    InstaMojo.prototype.listOffers = function (callback) {
+        this.request("GET", "/offer/", {}, {}, callback);
+    };
+
+    InstaMojo.prototype.createOffer = function (params, callback) {
+        this.request("POST", "/offer/", params, {}, callback);
+    };
+
+    InstaMojo.prototype.getOffer = function (slug, callback) {
+        this.request("GET", "/offer/" + slug + "/", {}, {}, callback);
+    };
+
+    InstaMojo.prototype.archiveOffer = function (slug, callback) {
+        this.request("DELETE", "/offer/" + slug + "/", {}, {}, callback);
+    };
+
+    InstaMojo.prototype.editOffer = function (slug, params, callback) {
+        this.request("PUT", "/offer/" + slug + "/", params, {}, callback);
     };
 
     Y.InstaMojo = InstaMojo;
