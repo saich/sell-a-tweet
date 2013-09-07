@@ -1,0 +1,6 @@
+{
+    "port": 8666,
+    "maxSockets": {
+        "http": 30
+    }
+}
