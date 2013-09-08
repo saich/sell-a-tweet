@@ -62,7 +62,7 @@ YUI.add('SellATweet', function(Y, NAME) {
                 if (result && result.success) {
                     ac.done(result.offer);
                 } else {
-                    ac.error({});
+                    ac.error(result);
                 }
             });
         },
