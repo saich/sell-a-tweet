@@ -4,7 +4,7 @@
     "index": {
         "verbs": ["get"],
         "path": "/",
-        "call": "sellatweet.index"
+        "call": "frame.index"
     },
 
     "login": {
@@ -22,7 +22,7 @@
     "create": {
         "verbs": ["post"],
         "path": "/create",
-        "call": "sellatweet.create"
+        "call": "frame.create"
     },
 
     "tweets": {

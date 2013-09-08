@@ -2,6 +2,16 @@
     "settings": ["master"],
     "appPort": "8666",
     "specs": {
+        "frame": {
+            "type": "HTMLFrameMojit",
+            "config": {
+                "title": "Sell a Tweet",
+                "deploy": true,
+                "child": {
+                    "type": "SellATweet"
+                }
+            }
+        },
         "sellatweet": {
             "type": "SellATweet"
         }
