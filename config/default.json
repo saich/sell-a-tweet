@@ -7,5 +7,11 @@
     "instamojo": {
         "endpoint": "https://www.instamojo.com/api/1",
         "appid": "9b2b46005b4e17e0a3a1d7ab01653a0e"
+    },
+    "twitter": {
+        "consumer_key": "N0MPy89QUaPRIDb7wtRw",
+        "consumer_secret": "mrKd4lDQIcNfRBlFtFHxMSayBxBAO6QbhbhfSBFVCM",
+        "access_token_key": "93345326-LhgsxVuFMNcqea0XO6efsIFFfdCcC2R9xHGgp85Om",
+        "access_token_secret": "JRFhjlM58iT1nfVlbXZpHpoCF5D9ge0ZoQzTBzPJ9ww"
     }
 }

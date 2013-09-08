@@ -65,9 +65,19 @@ YUI.add('SellATweet', function(Y, NAME) {
                     ac.error({});
                 }
             });
+        },
+
+        tweets: function (ac) {
+            var screenname = ac.params.getFromUrl("screenname");
+            ac.models.get("TwitterModel").getTweets(screenname, function (err, tweets) {
+                if (err) {
+                    return ac.error(err);
+                }
+                ac.done(tweets, "json");
+            });
         }
     };
 
 }, '0.0.1', {requires: ['mojito',
-    'mojito-session-addon', 'mojito-http-addon', 'mojito-params-addon',
+    'mojito-session-addon', 'mojito-http-addon', 'mojito-params-addon', 'mojito-models-addon',
     'instamojo']});

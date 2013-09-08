@@ -23,5 +23,11 @@
         "verbs": ["post"],
         "path": "/create",
         "call": "sellatweet.create"
+    },
+
+    "tweets": {
+        "verbs": ["get"],
+        "path": "/tweets.json",
+        "call": "sellatweet.tweets"
     }
 }]
