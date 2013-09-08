@@ -1,7 +1,7 @@
 <div id="{{mojit_view_id}}">
 {{#if needAuth}}
 {{#if loginerror}}<p class="error">Invalid credentials. Try again!</p>{{/if}}
-    <form method="post" action="/login">
+    <form id="login-form" method="post" action="/login">
         <label>username: <input type="text" name="username" placeholder="username"></label>
         <label>password: <input type="password" name="password" placeholder="password"></label>
         <input type="submit" value="log in" />
@@ -9,9 +9,20 @@
 {{else}}
 <a href="/logout" title="Logout">logout</a>
 
-<form method="post" action="/create">
+<form id="twitter-form" method="get" action="">
+    <label>Enter your Twitter screen name: <input id="twitter-screen-name"/></label>
+    <input type="submit" value="Next"/>
+</form>
+
+<form id="tweets-form">
+    <p>Choose one of your awesome tweets:</p>
+    <div id="tweets-list"></div>
+    <input type="submit" value="Next"/>
+</form>
+
+<form id="create-offer-form" method="post" action="/create">
     <input name="title" placeholder="Title"/>
-    <input name="description" placeholder="Description"/>
+    <textarea id="offer-description" name="description" disabled="disabled" placeholder="Description"></textarea>
     <select name="currency">
         <option value="USD">USD</option>
         <option value="INR">INR</option>
