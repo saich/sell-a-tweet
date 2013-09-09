@@ -7,6 +7,7 @@ YUI.add('SellATweet', function(Y, NAME) {
         index: function(ac) {
             var loginerror = ac.session.get("loginerror");
             ac.session.set("loginerror", false);
+            ac.assets.addCss("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
              ac.done({
                 loginerror: loginerror,
                 needAuth: !ac.session.get("imtoken"),
@@ -53,6 +54,8 @@ YUI.add('SellATweet', function(Y, NAME) {
                 ac.http.redirect("/", 303); // Redirect to login page
             }
 
+            ac.assets.addCss("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
+
             var params = ac.params.getFromBody();
             var im = new Y.InstaMojo({
                 authtoken: ac.session.get("imtoken")
@@ -79,5 +82,5 @@ YUI.add('SellATweet', function(Y, NAME) {
     };
 
 }, '0.0.1', {requires: ['mojito',
-    'mojito-session-addon', 'mojito-http-addon', 'mojito-params-addon', 'mojito-models-addon',
+    'mojito-session-addon', 'mojito-http-addon', 'mojito-params-addon', 'mojito-models-addon', 'mojito-assets-addon',
     'instamojo']});

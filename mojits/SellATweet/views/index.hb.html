@@ -1,35 +1,80 @@
 <div id="{{mojit_view_id}}">
+<style>
+    #login-form, #create-offer-form, #twitter-form, #tweets-form {
+        border-radius: 5px;
+        padding: 15px;
+        border: 1px solid #DDD;
+        margin: 30px auto;
+    }
+
+    #login-form, #twitter-form {
+        max-width: 300px;
+    }
+
+    #create-offer-form {
+        max-width: 500px;
+    }
+    #tweets-form {
+        max-width: 1000px;
+    }
+</style>
 {{#if needAuth}}
+
+<h1 style="text-align: center">Sell a Tweet</h1>
 {{#if loginerror}}<p class="error">Invalid credentials. Try again!</p>{{/if}}
-    <form id="login-form" method="post" action="/login">
-        <label>username: <input type="text" name="username" placeholder="username"></label>
-        <label>password: <input type="password" name="password" placeholder="password"></label>
-        <input type="submit" value="log in" />
-    </form>
+<form id="login-form" method="post" action="/login" role="form">
+    <p>Login with your Instamojo credentials to start selling your awesome tweets</p>
+    <div class="form-group">
+        <label for="username">username</label>
+        <input type="text" id="username" name="username" placeholder="Enter username" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="password">password</label>
+        <input type="password" id="password" name="password" placeholder="password" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-default">Login</button>
+</form>
+
 {{else}}
-<a href="/logout" title="Logout">logout</a>
-
-<form id="twitter-form" method="get" action="">
-    <label>Enter your Twitter screen name: <input id="twitter-screen-name"/></label>
-    <input type="submit" value="Next"/>
+<a href="/logout" title="Logout" style="margin:5px 20px;float:right">logout</a>
+<div class="clearfix"></div>
+<form id="twitter-form" method="get" action="" role="form" class="form-inline">
+    <p><b>Step 1/3</b>: Provide your twitter handle</p>
+    <div class="form-group">
+        <label for="twitter-screen-name" class="sr-only">Enter your Twitter's screen name.</label>
+        <input type="text" id="twitter-screen-name" required class="form-control" placeholder="Enter your Twitter handle" style="width:200px">
+    </div>
+    <button type="submit" class="btn btn-default">Next</button>
 </form>
 
-<form id="tweets-form">
-    <p>Choose one of your awesome tweets:</p>
+<form id="tweets-form" role="form" style="display:none">
+    <p><b>Step 2/3</b>: Choose one of your awesome tweets.</p>
     <div id="tweets-list"></div>
-    <input type="submit" value="Next"/>
+    <button type="submit" class="btn btn-default">Next</button>
 </form>
 
-<form id="create-offer-form" method="post" action="/create">
-    <input name="title" placeholder="Title"/>
-    <textarea id="offer-description" name="description" readonly="readonly" placeholder="Description"></textarea>
-    <select name="currency">
-        <option value="USD">USD</option>
-        <option value="INR">INR</option>
-    </select>
-    <input type="number" name="base_price" placeholder="Base Price"/>
-    <input type="submit" value="create" />
-    
+<form id="create-offer-form" method="post" action="/create" role="form" style="display:none">
+    <p><b>Step 3/3</b>: Choose a catchy title and set price.</p>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Choose a title for the offer" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="offer-description">Description</label>
+        <textarea id="offer-description" name="description" readonly="readonly" class="form-control" rows="4"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="offer-currency">Currency</label>
+        <select id="offer-currency" name="currency" class="form-control">
+            <option value="USD">USD</option>
+            <option value="INR">INR</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="offer-price">Price</label>
+        <input type="number" id="offer-price" name="base_price" min="0" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-default">Create</button>    
 </form>
 {{/if}}
 </div>

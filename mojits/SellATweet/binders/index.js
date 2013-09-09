@@ -27,12 +27,15 @@ YUI.add("SellATweetBinderIndex", function (Y, NAME) {
             twitterForm.on("submit", function (e) {
                 e.preventDefault();
                 self.fillTweets(Y.one("#twitter-screen-name").get("value"));
+                twitterForm.hide();
+                tweetsForm.show();
                 return false;
             });
 
             tweetsForm.on("submit", function (e) {
                 e.preventDefault();
-                // TODO: Show the create form..
+                tweetsForm.hide();
+                createOfferForm.show();
                 var description = Y.all("input[name=tweet]").filter(":checked").item(0).get("parentNode").get("text");
                 Y.one("#offer-description").set("text", description);
                 return false;
@@ -40,7 +43,7 @@ YUI.add("SellATweetBinderIndex", function (Y, NAME) {
         },
 
         fillTweets: function (screenname) {
-            var tmpl = '<label><input type="radio" name="tweet" value="{index}">{text}</label><br>';
+            var tmpl = '<div class="radio"><label><input type="radio" name="tweet" value="{index}">{text}</label></div>';
             Y.io("/tweets.json", {
                 data: "screenname=" + screenname,
                 on: {
@@ -49,6 +52,7 @@ YUI.add("SellATweetBinderIndex", function (Y, NAME) {
                         try {
                             var content = "", index = 0;
                             tweets = JSON.parse(o.responseText);
+                            // TODO: Handle 0 tweets case..
                             tweets.forEach(function (tweet) {
                                 content+= Y.Lang.sub(tmpl, {
                                     index: index++,
@@ -56,6 +60,7 @@ YUI.add("SellATweetBinderIndex", function (Y, NAME) {
                                 });
                             });
                             Y.one("#tweets-list").setHTML(content);
+                            Y.all("input[name=tweet]").item(0).set("checked", true); // check the 1st one..
                         } catch (ex) {
                             // TODO: Display error
                         }
